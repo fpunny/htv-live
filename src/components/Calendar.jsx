@@ -15,6 +15,25 @@ const calcHeight = () => {
     return (h + m + s) * 47 / 900;
 }
 
+const calcSchedule = events => {
+    bloom.fill(0);
+    return (
+        events.map(event => {
+            const meta = getPos(
+                moment.utc(event.time[0], 'H:mm'),
+                moment.utc(event.time[1], 'H:mm'),
+                event.overlap
+            );
+            let offset = 0;
+            for (let i = meta[1]; i < meta[1] + meta[0]; i++) {
+                offset = Math.max(offset, bloom[i]);
+                bloom[i] += 1;
+            }
+            return { ...event, meta, offset };
+        })
+    );
+}
+
 const parseTime = (h, m = '00') => {
     const a = h % 12 || 12;
     const b = `${m}`.padStart(2, '0');
@@ -27,6 +46,8 @@ const getPos = (f, t, overlap) => {
     const h = overlap === 'TOP' ? 0 : (f.format('H') * 4) + f.format('m') / 15;
     switch(overlap) {
         case 'TOP':
+            diff = t.diff(moment.utc('00:00', 'H:mm'), 'minute');
+            break;
         case 'BOTTOM':
             diff = moment.utc('24:00', 'H:mm').diff(f, 'minute');
             break;
@@ -34,7 +55,7 @@ const getPos = (f, t, overlap) => {
             diff = t.diff(f, 'minute');
             break;
     }
-    return [ diff, h ];
+    return [ diff / 15, h ];
 }
 
 const layout = () => (
@@ -80,16 +101,15 @@ export const Calendar = ({ active, select }) => {
         <section className='cal'>
             <h1 className='cal__title'>Schedule - { date.format('MMMM Do') }</h1>
             <ul className='cal__list'>
-                { showClock ? <li style={{ transform: `translate3d(0, ${ timer }px, 0)` }} className='cal__clock'/> : null }
+                { showClock ? <li style={{ transform: `translate3d(0, ${ timer - 1 }px, 0)` }} className='cal__clock'/> : null }
                 {
-                    events ? events.map(({ title, location, overlap, time: [from, to] }, i) => {
-                        const f = moment.utc(from, 'H:mm');
-                        const t = moment.utc(to, 'H:mm');
-                        const [ diff, h ] = getPos(f, t, overlap);
+                    events ? calcSchedule(events).map(({ title, location, meta, offset, time: [from, to] }, i) => {
+                        const [ diff, h ] = meta;
+                        const w = Math.max(...bloom.slice(h, h + diff));
                         const style = {
-                            transform: `translate3d(0, ${ h * HEIGHT }px, 0)`,
-                            height: `${ (diff * HEIGHT / 15) - 1 }px`,
-                            width: '100%'
+                            transform: `translate3d(${ offset * 100 }%, ${ h * HEIGHT }px, 0)`,
+                            height: `${ (diff * HEIGHT) - 1 }px`,
+                            width: `${ 100 / (w || 1) }%`
                         };
                         return (
                             <li key={ i } style={ style } data-index={ i } onClick={ click } className='cal__item'>

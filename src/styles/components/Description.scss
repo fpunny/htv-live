@@ -4,7 +4,7 @@
 .info {
     @include flex(column);
     background-color: white;
-    max-width: 500px;
+    max-width: 460px;
     width: 40%;
 
     @include media('TABLET') {
