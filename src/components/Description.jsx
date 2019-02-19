@@ -4,7 +4,7 @@ import '../styles/components/Description.scss';
 const parseTime = (h, m = '00') => {
     const a = h % 12 || 12;
     const b = `${m}`.padStart(2, '0');
-    const c = h > 12 ? 'pm' : 'am';
+    const c = h > 12 && h < 24 ? 'pm' : 'am';
     return `${ a }:${ b }${ c }`;
 };
 
