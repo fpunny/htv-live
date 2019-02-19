@@ -2,10 +2,6 @@
 
 export default [
     {
-        date: '19/02/19',
-        schedule: () => import('./test')
-    },
-    {
         date: '22/02/19',
         schedule: () => import('./friday')
     },
