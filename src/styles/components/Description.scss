@@ -1,0 +1,59 @@
+@import '../mixins';
+@import '../variables';
+
+.info {
+    @include flex(column);
+    background-color: white;
+    max-width: 500px;
+    width: 40%;
+
+    @include media('TABLET') {
+        display: none;
+    }
+
+    &__title {
+        font-size: 1.3rem;
+        padding: 35px 25px 10px;
+    }
+
+    &__tags {
+        @include flex;
+        flex-wrap: wrap;
+        padding: 5px 25px 10px;
+        list-style-type: none;
+    }
+
+    &__tag {
+
+        font-size: 0.85rem;
+        margin: 0 5px 5px 0;
+        border-radius: 999px;
+        border: 1.5px solid $SECONDARY_TEXT;
+        padding: 5px 10px;
+
+        &-title, &-text {
+            color: $SECONDARY_TEXT;
+        }
+
+        &-title {
+            font-weight: bold;
+            letter-spacing: 0.02rem;
+        }
+
+        &-text {
+            margin-left: 4px;
+        }
+    }
+
+    &__text {
+        font-size: 0.92rem;
+        line-height: 1.7;
+        padding: 0 25px 10px;
+    }
+
+    &__help {
+        font-size: 1.15rem;
+        font-weight: bold;
+        padding: 25px 25px 10px;
+    }
+}

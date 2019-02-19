@@ -1,0 +1,36 @@
+// This is where you keep all your reuseable values
+
+// Colors
+$PRIMARY_FONT: 'Oxygen', sans-serif;
+$HOVER_COLOR: #f0f0f1;
+$PRIMARY_TEXT: #345;
+$SECONDARY_TEXT: #9eaab6;
+$BACKGROUND_COLOR: #f1f3f5;
+
+// Transitions
+$EASE: (
+    NORMAL: cubic-bezier(0.4, 0.0, 0.2, 1),
+    ENTER: cubic-bezier(0.0, 0.0, 0.2, 1),
+    EXIT: cubic-bezier(0.4, 0.0, 1, 1)
+);
+
+// Speeds
+$SPEED: (
+    FAST: 100ms,
+    NORMAL: 200ms,
+    SLOW: 300ms,
+    PAGE: 500ms
+);
+
+// Media screen sizes
+$MEDIA: (
+    PHONE: 425px,
+    TABLET: 768px,
+    DESKTOP: 1024px,
+    LARGE_DESKTOP: 1440px
+);
+
+// Export for navigate to use
+:export {
+    speed: map-get($SPEED, PAGE)
+}

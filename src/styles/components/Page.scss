@@ -1,0 +1,48 @@
+@import '../mixins';
+@import '../variables';
+
+.page {
+    @include flex;
+    height: 100vh;
+
+    &__days {
+        @include scroll;
+        width: 76px;
+        height: 100%;
+        z-index: 10;
+        overflow: auto;
+        background-color: white;
+        box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    }
+
+    &__day {
+        @include transition(background-color);
+        @include flex(column, center);
+        cursor: pointer;
+        height: 75px;
+
+        &:hover, &:active, &:focus, &--active {
+            background-color: $HOVER_COLOR;
+        }
+
+        &-title, &-date {
+            pointer-events: none;
+        }
+
+        &-title {
+            font-size: 1.04rem;
+            font-weight: bold;
+        }
+
+        &-date {
+            color: $SECONDARY_TEXT;
+            font-size: 0.71rem;
+        }
+    }
+
+    &__content {
+        @include flex;
+        flex-grow: 1;
+        overflow: hidden;
+    }
+}
