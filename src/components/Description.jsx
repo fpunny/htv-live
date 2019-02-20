@@ -19,12 +19,14 @@ const showEvent = ({ title, location, description, time, lead }) => (
                         `${ parseTime(...val[0].split(':')) } - ${ parseTime(...val[1].split(':')) }`
                     );
                     return (
-                        <li key={ key } className='info__tag'>
-                            <span className='info__tag-title'>
-                                { key.charAt(0).toUpperCase() + key.slice(1) }:
-                            </span>
-                            <span className='info__tag-text'>{ res }</span>
-                        </li>
+                        val ? (
+                            <li key={ key } className='info__tag'>
+                                <span className='info__tag-title'>
+                                    { key.charAt(0).toUpperCase() + key.slice(1) }:
+                                </span>
+                                <span className='info__tag-text'>{ res }</span>
+                            </li>
+                        ): null
                     );
                 })
             }
