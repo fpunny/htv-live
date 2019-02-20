@@ -70,6 +70,13 @@ export default [
         time: ['14:00', '15:00'] // from - to
     },
     {
+        title: 'Snack',
+        location: 'Nasir\'s Hot Dog Stand',
+        description: 'Snack',
+        // lead: ['Jun Zheng'],
+        time: ['16:00', '22:00'] // from - to
+    },
+    {
         title: 'Women In Code Summit',
         location: 'HW214',
         description: 'Women In Code Summit',
@@ -96,6 +103,13 @@ export default [
         description: 'Advanced React Workshop',
         // lead: ['Jun Zheng'],
         time: ['20:00', '21:00'] // from - to
+    },
+    {
+        title: 'Nerf Gun Fight',
+        location: 'TBA',
+        description: 'Nerf Gun Fight!',
+        // lead: ['Jun Zheng'],
+        time: ['21:00', '22:00'] // from - to
     },
     {
         title: 'Dinner',
