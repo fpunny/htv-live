@@ -8,10 +8,9 @@ const INTERVAL = 2000;
 const HEIGHT = 47;
 
 const skip = (s, e) => {
-    const a = moment.utc('00:00', 'H:mm');
-    s = s.diff(a, 'minute') / 15;
-    e = e.diff(a, 'minute') / 15;
-    return (e - s) * 900;
+    const a = s.hours() * 3600 + s.minutes() * 60 + s.seconds();
+    const b = e.hours() * 3600 + e.minutes() * 60 + e.seconds();
+    return b - a;
 }
 
 const calcHeight = cut => {
@@ -137,13 +136,13 @@ export const Calendar = ({ active, select }) => {
         let t;
 
         if (showClock) {
-            t = window.setTimeout(
+            t = window.setInterval(
                 () => setTimer(calcHeight(cut)),
                 INTERVAL
             );
         }
 
-        return () => clearTimeout(t);
+        return () => clearInterval(t);
     });
 
     return (

@@ -3,7 +3,7 @@
 export default [
     {
         date: '20/02/19',
-        cut: ['1:30', '2:00'],
+        cut: ['2:30', '2:45'],
         schedule: () => import('./test')
     },
     {
