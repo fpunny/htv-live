@@ -8,14 +8,17 @@ export default [
     }, */
     {
         date: '22/02/19',
+        cut: ['0:00', '15:45'],
         schedule: () => import('./friday')
     },
     {
         date: '23/02/19',
+        cut: ['2:15', '8:15'],
         schedule: () => import('./saturday')
     },
     {
         date: '24/02/19',
+        cut: ['2:15', '8:30'],
         schedule: () => import('./sunday')
     },
 ]
